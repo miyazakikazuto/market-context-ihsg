@@ -15,24 +15,18 @@
     --mono: 'IBM Plex Mono', monospace; --sans: 'IBM Plex Sans', sans-serif;
   }
   body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.6; padding: 2rem 1.5rem; max-width: 780px; margin: 0 auto; }
-
   header { border-bottom: 0.5px solid var(--border2); padding-bottom: 1.25rem; margin-bottom: 2rem; }
   .header-label { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
   h1 { font-size: 22px; font-weight: 500; letter-spacing: -.01em; margin-bottom: 6px; }
   .subtitle { font-size: 13px; color: var(--muted); }
-
   .year-block { margin-bottom: 2.5rem; }
   .year-label { font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 0.5px solid var(--border); }
-
   .month-block { margin-bottom: 1.5rem; }
   .month-label { font-family: var(--mono); font-size: 11px; color: var(--warn); text-transform: capitalize; margin-bottom: 8px; }
-
   .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
   .entry-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: block; transition: border-color .15s, background .15s; }
   .entry-card:hover { border-color: var(--border2); background: var(--surface2); }
   .entry-card.latest { border-color: var(--warn); }
-
   .entry-period { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .06em; }
   .entry-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
   .entry-tags { display: flex; flex-wrap: wrap; gap: 4px; }
@@ -41,12 +35,9 @@
   .tag.bull { border-color: #4caf7d55; color: var(--ok); }
   .tag.neutral { border-color: #c8922a55; color: var(--warn); }
   .latest-badge { font-family: var(--mono); font-size: 9px; padding: 2px 8px; border-radius: 20px; background: rgba(200,146,42,.15); color: var(--warn); border: 0.5px solid var(--warn); display: inline-block; margin-bottom: 6px; }
-
   .empty-card { background: var(--surface); border: 0.5px dashed var(--border); border-radius: 8px; padding: 12px 14px; }
   .empty-label { font-family: var(--mono); font-size: 10px; color: var(--muted); }
-
   footer { margin-top: 3rem; border-top: 0.5px solid var(--border); padding-top: 1rem; font-family: var(--mono); font-size: 10px; color: var(--muted); display: flex; justify-content: space-between; }
-
   @media (max-width: 500px) { .entry-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -61,29 +52,50 @@
 <div class="year-block">
   <div class="year-label">2026</div>
 
+  <!-- Januari -->
+  <div class="month-block">
+    <div class="month-label">Januari</div>
+    <div class="entry-grid">
+      <a class="entry-card" href="2026/januari/minggu-1/index.html">
+        <div class="entry-period">1 – 14 Januari 2026</div>
+        <div class="entry-title">IHSG ATH 9.075, euforia dimulai</div>
+        <div class="entry-tags">
+          <span class="tag bull">Bull puncak</span>
+          <span class="tag bull">ATH baru</span>
+        </div>
+      </a>
+      <a class="entry-card" href="2026/januari/minggu-3/index.html">
+        <div class="entry-period">15 – 31 Januari 2026</div>
+        <div class="entry-title">ATH 9.134 lalu crash 8% — MSCI shock</div>
+        <div class="entry-tags">
+          <span class="tag bull">ATH 9.134</span>
+          <span class="tag bear">Crash -8%</span>
+          <span class="tag bear">Trading halt</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
   <!-- Februari -->
   <div class="month-block">
     <div class="month-label">Februari</div>
     <div class="entry-grid">
-
       <a class="entry-card" href="2026/februari/minggu-1/index.html">
         <div class="entry-period">1 – 14 Februari 2026</div>
-        <div class="entry-title">IHSG puncak 8.748, euphoria</div>
-        <div class="entry-tags">
-          <span class="tag bull">Bull</span>
-          <span class="tag neutral">Puncak siklus</span>
-        </div>
-      </a>
-
-      <a class="entry-card" href="2026/februari/minggu-3/index.html">
-        <div class="entry-period">15 – 28 Februari 2026</div>
-        <div class="entry-title">Distribusi dimulai, asing mulai jual</div>
+        <div class="entry-title">Rebound ke 8.142, distribusi awal</div>
         <div class="entry-tags">
           <span class="tag neutral">Distribusi</span>
-          <span class="tag bear">Foreign sell</span>
+          <span class="tag bear">MSCI rebalancing</span>
         </div>
       </a>
-
+      <a class="entry-card" href="2026/februari/minggu-3/index.html">
+        <div class="entry-period">15 – 28 Februari 2026</div>
+        <div class="entry-title">Hormuz ditutup — bom waktu Maret</div>
+        <div class="entry-tags">
+          <span class="tag neutral">Distribusi aktif</span>
+          <span class="tag bear">Hormuz ditutup</span>
+        </div>
+      </a>
     </div>
   </div>
 
@@ -91,16 +103,14 @@
   <div class="month-block">
     <div class="month-label">Maret</div>
     <div class="entry-grid">
-
       <a class="entry-card" href="2026/maret/minggu-1/index.html">
         <div class="entry-period">1 – 14 Maret 2026</div>
-        <div class="entry-title">Koreksi awal, IHSG mulai turun</div>
+        <div class="entry-title">IHSG jebol 8.000, bear terkonfirmasi</div>
         <div class="entry-tags">
-          <span class="tag bear">Koreksi</span>
-          <span class="tag neutral">BI tahan rate</span>
+          <span class="tag bear">Bear</span>
+          <span class="tag bear">Fitch & Moody's negatif</span>
         </div>
       </a>
-
       <a class="entry-card latest" href="2026/maret/minggu-3/index.html">
         <div class="latest-badge">terbaru</div>
         <div class="entry-period">15 – 31 Maret 2026</div>
@@ -111,7 +121,6 @@
           <span class="tag bear">Inflasi 4,76%</span>
         </div>
       </a>
-
     </div>
   </div>
 
