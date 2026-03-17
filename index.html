@@ -22,7 +22,8 @@
   .year-block { margin-bottom: 2.5rem; }
   .year-label { font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 0.5px solid var(--border); }
   .month-block { margin-bottom: 1.5rem; }
-  .month-label { font-family: var(--mono); font-size: 11px; color: var(--warn); text-transform: capitalize; margin-bottom: 8px; }
+  .month-label { font-family: var(--mono); font-size: 11px; color: var(--warn); margin-bottom: 8px; }
+  .month-label.upcoming { color: var(--muted); }
   .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .entry-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: block; transition: border-color .15s, background .15s; }
   .entry-card:hover { border-color: var(--border2); background: var(--surface2); }
@@ -35,7 +36,7 @@
   .tag.bull { border-color: #4caf7d55; color: var(--ok); }
   .tag.neutral { border-color: #c8922a55; color: var(--warn); }
   .latest-badge { font-family: var(--mono); font-size: 9px; padding: 2px 8px; border-radius: 20px; background: rgba(200,146,42,.15); color: var(--warn); border: 0.5px solid var(--warn); display: inline-block; margin-bottom: 6px; }
-  .empty-card { background: var(--surface); border: 0.5px dashed var(--border); border-radius: 8px; padding: 12px 14px; }
+  .empty-card { background: var(--surface); border: 0.5px dashed var(--border); border-radius: 8px; padding: 12px 14px; opacity: 0.45; }
   .empty-label { font-family: var(--mono); font-size: 10px; color: var(--muted); }
   footer { margin-top: 3rem; border-top: 0.5px solid var(--border); padding-top: 1rem; font-family: var(--mono); font-size: 10px; color: var(--muted); display: flex; justify-content: space-between; }
   @media (max-width: 500px) { .entry-grid { grid-template-columns: 1fr; } }
@@ -52,84 +53,128 @@
 <div class="year-block">
   <div class="year-label">2026</div>
 
-  <!-- Januari -->
+  <!-- Januari ✓ -->
   <div class="month-block">
     <div class="month-label">Januari</div>
     <div class="entry-grid">
       <a class="entry-card" href="2026/januari/minggu-1/index.html">
         <div class="entry-period">1 – 14 Januari 2026</div>
         <div class="entry-title">IHSG ATH 9.075, euforia dimulai</div>
-        <div class="entry-tags">
-          <span class="tag bull">Bull puncak</span>
-          <span class="tag bull">ATH baru</span>
-        </div>
+        <div class="entry-tags"><span class="tag bull">Bull puncak</span><span class="tag bull">ATH baru</span></div>
       </a>
       <a class="entry-card" href="2026/januari/minggu-3/index.html">
         <div class="entry-period">15 – 31 Januari 2026</div>
         <div class="entry-title">ATH 9.134 lalu crash 8% — MSCI shock</div>
-        <div class="entry-tags">
-          <span class="tag bull">ATH 9.134</span>
-          <span class="tag bear">Crash -8%</span>
-          <span class="tag bear">Trading halt</span>
-        </div>
+        <div class="entry-tags"><span class="tag bull">ATH 9.134</span><span class="tag bear">Crash -8%</span><span class="tag bear">Trading halt</span></div>
       </a>
     </div>
   </div>
 
-  <!-- Februari -->
+  <!-- Februari ✓ -->
   <div class="month-block">
     <div class="month-label">Februari</div>
     <div class="entry-grid">
       <a class="entry-card" href="2026/februari/minggu-1/index.html">
         <div class="entry-period">1 – 14 Februari 2026</div>
         <div class="entry-title">Rebound ke 8.142, distribusi awal</div>
-        <div class="entry-tags">
-          <span class="tag neutral">Distribusi</span>
-          <span class="tag bear">MSCI rebalancing</span>
-        </div>
+        <div class="entry-tags"><span class="tag neutral">Distribusi</span><span class="tag bear">MSCI rebalancing</span></div>
       </a>
       <a class="entry-card" href="2026/februari/minggu-3/index.html">
         <div class="entry-period">15 – 28 Februari 2026</div>
         <div class="entry-title">Hormuz ditutup — bom waktu Maret</div>
-        <div class="entry-tags">
-          <span class="tag neutral">Distribusi aktif</span>
-          <span class="tag bear">Hormuz ditutup</span>
-        </div>
+        <div class="entry-tags"><span class="tag neutral">Distribusi aktif</span><span class="tag bear">Hormuz ditutup</span></div>
       </a>
     </div>
   </div>
 
-  <!-- Maret -->
+  <!-- Maret ✓ -->
   <div class="month-block">
     <div class="month-label">Maret</div>
     <div class="entry-grid">
       <a class="entry-card" href="2026/maret/minggu-1/index.html">
         <div class="entry-period">1 – 14 Maret 2026</div>
         <div class="entry-title">IHSG jebol 8.000, bear terkonfirmasi</div>
-        <div class="entry-tags">
-          <span class="tag bear">Bear</span>
-          <span class="tag bear">Fitch & Moody's negatif</span>
-        </div>
+        <div class="entry-tags"><span class="tag bear">Bear</span><span class="tag bear">Fitch &amp; Moody's negatif</span></div>
       </a>
       <a class="entry-card latest" href="2026/maret/minggu-3/index.html">
         <div class="latest-badge">terbaru</div>
         <div class="entry-period">15 – 31 Maret 2026</div>
         <div class="entry-title">Bear market, rupiah ~Rp 17.000</div>
-        <div class="entry-tags">
-          <span class="tag bear">Bear</span>
-          <span class="tag bear">Rupiah lemah</span>
-          <span class="tag bear">Inflasi 4,76%</span>
-        </div>
+        <div class="entry-tags"><span class="tag bear">Bear</span><span class="tag bear">Rupiah lemah</span><span class="tag bear">Inflasi 4,76%</span></div>
       </a>
     </div>
   </div>
 
-  <!-- April -->
+  <!-- April → Desember: placeholder -->
   <div class="month-block">
-    <div class="month-label" style="color:var(--muted)">April <span style="font-size:10px;opacity:.5">(akan datang)</span></div>
+    <div class="month-label upcoming">April <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
     <div class="entry-grid">
-      <div class="empty-card"><div class="empty-label">1 – 14 Apr · belum diupload</div></div>
-      <div class="empty-card"><div class="empty-label">15 – 30 Apr · belum diupload</div></div>
+      <div class="empty-card"><div class="empty-label">1 – 14 Apr · ~14 Apr</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 30 Apr · ~30 Apr</div></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-label upcoming">Mei <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
+    <div class="entry-grid">
+      <div class="empty-card"><div class="empty-label">1 – 14 Mei · ~14 Mei</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 31 Mei · ~31 Mei</div></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-label upcoming">Juni <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
+    <div class="entry-grid">
+      <div class="empty-card"><div class="empty-label">1 – 14 Jun · ~14 Jun</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 30 Jun · ~30 Jun</div></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-label upcoming">Juli <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
+    <div class="entry-grid">
+      <div class="empty-card"><div class="empty-label">1 – 14 Jul · ~14 Jul</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 31 Jul · ~31 Jul</div></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-label upcoming">Agustus <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
+    <div class="entry-grid">
+      <div class="empty-card"><div class="empty-label">1 – 14 Agt · ~14 Agt</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 31 Agt · ~31 Agt</div></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-label upcoming">September <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
+    <div class="entry-grid">
+      <div class="empty-card"><div class="empty-label">1 – 14 Sep · ~14 Sep</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 30 Sep · ~30 Sep</div></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-label upcoming">Oktober <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
+    <div class="entry-grid">
+      <div class="empty-card"><div class="empty-label">1 – 14 Okt · ~14 Okt</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 31 Okt · ~31 Okt</div></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-label upcoming">November <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
+    <div class="entry-grid">
+      <div class="empty-card"><div class="empty-label">1 – 14 Nov · ~14 Nov</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 30 Nov · ~30 Nov</div></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-label upcoming">Desember <span style="font-size:10px;opacity:.5">· belum diupload</span></div>
+    <div class="entry-grid">
+      <div class="empty-card"><div class="empty-label">1 – 14 Des · ~14 Des</div></div>
+      <div class="empty-card"><div class="empty-label">15 – 31 Des · ~31 Des</div></div>
     </div>
   </div>
 
