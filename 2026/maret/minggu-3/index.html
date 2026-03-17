@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Context Indonesia 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0f0e; --surface: #161918; --surface2: #1e2220;
+    --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+    --text: #e8ebe9; --muted: #7a8a80;
+    --danger: #e05a4a; --warn: #c8922a; --ok: #4caf7d;
+    --mono: 'IBM Plex Mono', monospace; --sans: 'IBM Plex Sans', sans-serif;
+  }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.6; padding: 2rem 1.5rem; max-width: 980px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 0.5px solid var(--border2); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+  .header-label { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+  h1 { font-size: 20px; font-weight: 500; letter-spacing: -.01em; }
+  .datestamp { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+  .regime-pill { display: inline-block; background: #3a1a1a; color: var(--danger); font-family: var(--mono); font-size: 10px; padding: 2px 10px; border-radius: 20px; border: 0.5px solid var(--danger); margin-top: 6px; }
+  .section-title { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+  .card-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .metric-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .metric-label { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; }
+  .metric-val { font-family: var(--mono); font-size: 20px; font-weight: 500; line-height: 1.2; }
+  .metric-val.danger { color: var(--danger); } .metric-val.warn { color: var(--warn); } .metric-val.ok { color: var(--ok); }
+  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
+  .divider { border: none; border-top: 0.5px solid var(--border); margin: 1.25rem 0; }
+  .regime-track { display: flex; border-radius: 6px; overflow: hidden; height: 26px; margin-bottom: 8px; border: 0.5px solid var(--border); }
+  .regime-seg { display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; font-weight: 500; }
+  .signal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; }
+  .signal-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+  .signal-card.red { border-left: 2px solid var(--danger); } .signal-card.amber { border-left: 2px solid var(--warn); } .signal-card.green { border-left: 2px solid var(--ok); }
+  .signal-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .signal-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .verdict-box { background: var(--surface); border: 0.5px solid var(--border2); border-left: 3px solid var(--warn); border-radius: 8px; padding: 14px 16px; }
+  .verdict-title { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--warn); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+  .verdict-body { font-size: 13px; color: #c0ccc5; line-height: 1.7; }
+  .verdict-body strong { color: var(--text); font-weight: 500; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { font-family: var(--mono); font-size: 10px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid; }
+  .tag.avoid { border-color: var(--danger); color: var(--danger); background: rgba(224,90,74,.1); }
+  .tag.buy { border-color: var(--ok); color: var(--ok); background: rgba(76,175,125,.1); }
+  .tag.wait { border-color: var(--warn); color: var(--warn); background: rgba(200,146,42,.1); }
+
+  /* Charts */
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+  .chart-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 14px; }
+  .chart-title { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+  .chart-current { font-family: var(--mono); font-size: 18px; font-weight: 500; }
+  .chart-change { font-family: var(--mono); font-size: 10px; margin-bottom: 10px; }
+  .chart-wrap { position: relative; height: 110px; }
+
+  /* Edit panel */
+  .edit-panel { background: var(--surface2); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 1.5rem; }
+  .edit-panel summary { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; cursor: pointer; user-select: none; list-style: none; display: flex; align-items: center; gap: 6px; }
+  .edit-panel summary::before { content: '▶'; font-size: 8px; transition: transform .2s; }
+  .edit-panel[open] summary::before { transform: rotate(90deg); }
+  .edit-panel summary::-webkit-details-marker { display: none; }
+  .edit-inner { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .edit-label { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; }
+  textarea.data-input { width: 100%; background: var(--bg); border: 0.5px solid var(--border2); border-radius: 6px; color: var(--text); font-family: var(--mono); font-size: 11px; padding: 8px 10px; resize: vertical; min-height: 90px; line-height: 1.6; }
+  textarea.data-input:focus { outline: none; border-color: var(--warn); }
+  .btn-update { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; background: transparent; border: 0.5px solid var(--warn); color: var(--warn); padding: 6px 16px; border-radius: 20px; cursor: pointer; margin-top: 10px; }
+  .btn-update:hover { background: rgba(200,146,42,.12); }
+
+  /* Stock table */
+  .sector-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .sector-tab { font-family: var(--mono); font-size: 10px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border2); color: var(--muted); cursor: pointer; background: transparent; transition: all .15s; }
+  .sector-tab.active { border-color: var(--warn); color: var(--warn); background: rgba(200,146,42,.1); }
+  .stock-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .stock-table th { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; padding: 6px 10px; border-bottom: 0.5px solid var(--border2); text-align: left; font-weight: 400; }
+  .stock-table td { padding: 8px 10px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+  .stock-table tr:last-child td { border-bottom: none; }
+  .stock-table tr:hover td { background: var(--surface2); }
+  .badge { font-family: var(--mono); font-size: 9px; padding: 2px 8px; border-radius: 20px; border: 0.5px solid; display: inline-block; }
+  .badge.buy { border-color: var(--ok); color: var(--ok); background: rgba(76,175,125,.1); }
+  .badge.hold { border-color: var(--warn); color: var(--warn); background: rgba(200,146,42,.1); }
+  .badge.avoid { border-color: var(--danger); color: var(--danger); background: rgba(224,90,74,.1); }
+  .note-cell { color: var(--muted); font-size: 11px; max-width: 220px; }
+  .add-row-btn { font-family: var(--mono); font-size: 10px; background: transparent; border: 0.5px dashed var(--border2); color: var(--muted); padding: 6px 14px; border-radius: 6px; cursor: pointer; margin-top: 8px; }
+  .add-row-btn:hover { border-color: var(--ok); color: var(--ok); }
+  .del-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 12px; padding: 0 4px; }
+  .del-btn:hover { color: var(--danger); }
+
+  footer { margin-top: 2rem; border-top: 0.5px solid var(--border); padding-top: 1rem; font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: center; }
+  @media (max-width: 640px) {
+    .card-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .signal-grid, .charts-grid, .edit-inner { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-label">Market Intelligence · Indonesia Equities</div>
+    <h1>Market Context Indonesia 2026</h1>
+    <div class="regime-pill">▼ BEAR MARKET · KOREKSI AKTIF</div>
+  </div>
+  <div class="datestamp"><div>17 Maret 2026</div><div>Jakarta · IDX</div></div>
+</header>
+
+<!-- Snapshot -->
+<div class="section-title">Snapshot hari ini</div>
+<div class="card-grid-4">
+  <div class="metric-card"><div class="metric-label">IHSG</div><div class="metric-val danger">~7.049</div><div class="metric-sub">▼ dari puncak 8.748</div></div>
+  <div class="metric-card"><div class="metric-label">USD / IDR</div><div class="metric-val danger">Rp 16.998</div><div class="metric-sub">Mendekati Rp 17.000</div></div>
+  <div class="metric-card"><div class="metric-label">Inflasi (Feb 2026)</div><div class="metric-val warn">4,76%</div><div class="metric-sub">Target BI: 2,5% ±1%</div></div>
+  <div class="metric-card"><div class="metric-label">BI Rate</div><div class="metric-val ok">4,75%</div><div class="metric-sub">Ditahan 5x berturut</div></div>
+</div>
+
+<hr class="divider">
+
+<!-- Charts -->
+<div class="section-title">Chart historis</div>
+
+<details class="edit-panel" id="editPanel">
+  <summary>Edit data chart</summary>
+  <div class="edit-inner">
+    <div>
+      <div class="edit-label">Data IHSG — format: Label,Nilai</div>
+      <textarea class="data-input" id="ihsgInput">Jan,8748
+Feb,8421
+Mar-1,8105
+Mar-2,7680
+Mar-3,7320
+Mar-4,7049</textarea>
+    </div>
+    <div>
+      <div class="edit-label">Data USD/IDR — format: Label,Nilai</div>
+      <textarea class="data-input" id="usdInput">Jan,16200
+Feb,16480
+Mar-1,16620
+Mar-2,16790
+Mar-3,16910
+Mar-4,16998</textarea>
+    </div>
+  </div>
+  <button class="btn-update" onclick="updateCharts()">Update Charts</button>
+</details>
+
+<div class="charts-grid">
+  <div class="chart-card">
+    <div class="chart-title">IHSG · IDX Composite</div>
+    <div class="chart-current danger" id="ihsgCurrent">7.049</div>
+    <div class="chart-change danger" id="ihsgChange">▼ -19,4% dari titik pertama</div>
+    <div class="chart-wrap"><canvas id="ihsgChart"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">USD / IDR · Nilai Tukar</div>
+    <div class="chart-current danger" id="usdCurrent">Rp 16.998</div>
+    <div class="chart-change danger" id="usdChange">▲ +4,9% YTD</div>
+    <div class="chart-wrap"><canvas id="usdChart"></canvas></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- Regime -->
+<div class="section-title">Market regime · Posisi siklus</div>
+<div class="regime-track">
+  <div class="regime-seg" style="width:20%;background:#1a2535;color:#4a7aaa;">Akumulasi</div>
+  <div class="regime-seg" style="width:25%;background:#1a2e20;color:#4caf7d;">Bull 2023–24</div>
+  <div class="regime-seg" style="width:15%;background:#2e2010;color:#c8922a;">Distribusi</div>
+  <div class="regime-seg" style="width:20%;background:#3a1a1a;color:#e05a4a;font-weight:600;">▶ Bearish kini</div>
+  <div class="regime-seg" style="width:20%;background:#1e2220;color:#7a8a80;">Re-akumulasi?</div>
+</div>
+<p style="font-size:12px;color:var(--muted);margin-bottom:1.5rem;">IHSG turun ~19% dari puncak 8.748 → secara teknikal memasuki zona bear market (&gt;-20%). Siklus ini dipicu tekanan eksternal (USD kuat, geopolitik) + kekhawatiran domestik.</p>
+
+<hr class="divider">
+
+<!-- Red flags -->
+<div class="section-title">Red flags · Concern utama</div>
+<div class="signal-grid">
+  <div class="signal-card red"><div class="signal-title">Rupiah under pressure</div><div class="signal-desc">USD/IDR mendekati Rp 17.000 — level psikologis kritis. Cadangan devisa BI di $151,9M, terendah 3 bulan. Amunisi intervensi terbatas.</div></div>
+  <div class="signal-card red"><div class="signal-title">Inflasi melonjak</div><div class="signal-desc">Feb 2026: 4,76% YoY — jauh di atas target 2,5%±1%. Dipicu Ramadan, Lebaran + harga minyak global. BI belum bisa cut rate.</div></div>
+  <div class="signal-card red"><div class="signal-title">Foreign outflow</div><div class="signal-desc">Asing net sell saham blue chip. MSCI rebalancing berpotensi kurangi bobot Indonesia → tekanan struktural berkelanjutan.</div></div>
+  <div class="signal-card red"><div class="signal-title">Geopolitik Timur Tengah</div><div class="signal-desc">Konflik Iran–AS–Israel → minyak naik $130/bbl. Indonesia net oil importer → beban fiskal besar & tekanan rupiah lanjutan.</div></div>
+  <div class="signal-card amber"><div class="signal-title">Fiskal domestik dipertanyakan</div><div class="signal-desc">Investor skeptis atas disiplin fiskal & arah kebijakan Prabowo: Danantara, pemangkasan anggaran, dan ketidakpastian regulasi.</div></div>
+  <div class="signal-card amber"><div class="signal-title">Daya beli tertekan</div><div class="signal-desc">Imported inflation + rupiah lemah → harga barang pokok & BBM naik → konsumsi rumah tangga kelas menengah bawah tergerus.</div></div>
+</div>
+
+<hr class="divider">
+
+<!-- Green flags -->
+<div class="section-title">Green flags · Faktor pendukung</div>
+<div class="signal-grid">
+  <div class="signal-card green"><div class="signal-title">PDB masih proyeksi kuat</div><div class="signal-desc">Pemerintah proyeksikan pertumbuhan Q1 2026 di 6%, full-year 5,5–6%. BI target 5,33%. Fundamental jangka panjang masih solid.</div></div>
+  <div class="signal-card green"><div class="signal-title">Valuasi mulai menarik</div><div class="signal-desc">IHSG di bawah rata-rata historis PE. Investor jangka panjang mulai lirik fase akumulasi selektif di sektor tertentu.</div></div>
+  <div class="signal-card green"><div class="signal-title">Komoditas ekspor untung</div><div class="signal-desc">Rupiah lemah justru menguntungkan eksportir batu bara, CPO, nikel — pendapatan dolar lebih besar saat dikonversi ke rupiah.</div></div>
+  <div class="signal-card green"><div class="signal-title">Ruang cut rate pasca Lebaran</div><div class="signal-desc">Setelah inflasi Lebaran mereda (April–Mei), BI berpotensi kembali pangkas rate untuk dorong kredit 8–12% dan pertumbuhan.</div></div>
+</div>
+
+<hr class="divider">
+
+<!-- Stock Table -->
+<div class="section-title">Tabel saham rekomendasi per sektor</div>
+<div class="sector-tabs" id="sectorTabs"></div>
+<div id="stockTableWrap"></div>
+
+<hr class="divider">
+
+<!-- Verdict -->
+<div class="section-title">Implikasi keputusan investasi</div>
+<div class="verdict-box">
+  <div class="verdict-title">⚠ Bearish macro · Rupiah lemah · Siklus koreksi aktif</div>
+  <div class="verdict-body">Ini bukan siklus bull biasa — ini koreksi yang dipicu tekanan eksternal (geopolitik, strong dollar) sekaligus kekhawatiran domestik (fiskal, Danantara). Dalam kondisi ini, <strong>selective</strong> lebih penting dari <strong>fully invested</strong>. Timing re-entry lebih bijak tunggu sinyal stabilisasi rupiah + inflasi melandai post-Lebaran (April–Mei 2026).</div>
+  <div class="tag-row">
+    <span class="tag avoid">✕ Utang USD besar</span>
+    <span class="tag avoid">✕ Import-heavy</span>
+    <span class="tag avoid">✕ Growth stocks mahal</span>
+    <span class="tag buy">✓ Komoditas ekspor</span>
+    <span class="tag buy">✓ Defensif / FMCG</span>
+    <span class="tag buy">✓ Telko</span>
+    <span class="tag wait">⏳ Tunggu April–Mei</span>
+  </div>
+</div>
+
+<footer>Market Context Indonesia 2026 · Data per 17 Maret 2026 · Bukan rekomendasi investasi</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ─── Chart logic ───────────────────────────────────────────────
+function parseCSV(text) {
+  return text.trim().split('\n').map(l => {
+    const parts = l.split(',');
+    return { label: parts[0].trim(), value: parseFloat(parts[1]) };
+  }).filter(d => !isNaN(d.value));
+}
+
+let ihsgChart = null, usdChart = null;
+
+function makeChart(id, data, color) {
+  const ctx = document.getElementById(id).getContext('2d');
+  const vals = data.map(d => d.value);
+  const grad = ctx.createLinearGradient(0, 0, 0, 110);
+  grad.addColorStop(0, color + '44');
+  grad.addColorStop(1, color + '00');
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.map(d => d.label),
+      datasets: [{ data: vals, borderColor: color, borderWidth: 1.5, backgroundColor: grad, fill: true, tension: 0.4, pointRadius: 3, pointBackgroundColor: color, pointBorderWidth: 0 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1e2220', borderColor: 'rgba(255,255,255,.1)', borderWidth: 0.5,
+          titleColor: '#7a8a80', bodyColor: '#e8ebe9',
+          titleFont: { family: 'IBM Plex Mono', size: 10 },
+          bodyFont: { family: 'IBM Plex Mono', size: 11 },
+          callbacks: { label: ctx => '  ' + ctx.parsed.y.toLocaleString('id-ID') }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,.05)' }, ticks: { color: '#7a8a80', font: { family: 'IBM Plex Mono', size: 9 } } },
+        y: {
+          grid: { color: 'rgba(255,255,255,.05)' },
+          ticks: { color: '#7a8a80', font: { family: 'IBM Plex Mono', size: 9 }, maxTicksLimit: 4,
+            callback: v => v >= 10000 ? (v/1000).toFixed(0)+'k' : v >= 1000 ? (v/1000).toFixed(1)+'k' : v
+          },
+          min: Math.round(Math.min(...vals) * 0.979),
+          max: Math.round(Math.max(...vals) * 1.021)
+        }
+      }
+    }
+  });
+}
+
+function updateCharts() {
+  const ihsgData = parseCSV(document.getElementById('ihsgInput').value);
+  const usdData  = parseCSV(document.getElementById('usdInput').value);
+  if (ihsgChart) ihsgChart.destroy();
+  if (usdChart)  usdChart.destroy();
+  ihsgChart = makeChart('ihsgChart', ihsgData, '#e05a4a');
+  usdChart  = makeChart('usdChart',  usdData,  '#e05a4a');
+
+  const li = ihsgData[ihsgData.length-1].value, fi = ihsgData[0].value;
+  const lu = usdData[usdData.length-1].value,  fu = usdData[0].value;
+  const pi = ((li-fi)/fi*100).toFixed(1);
+  const pu = ((lu-fu)/fu*100).toFixed(1);
+
+  document.getElementById('ihsgCurrent').textContent = li.toLocaleString('id-ID');
+  document.getElementById('ihsgChange').textContent = (pi<0?'▼ ':'▲ +') + pi + '% dari titik pertama';
+  document.getElementById('usdCurrent').textContent = 'Rp ' + lu.toLocaleString('id-ID');
+  document.getElementById('usdChange').textContent  = (pu>0?'▲ +':'▼ ') + pu + '% dari titik pertama';
+}
+
+// ─── Stock table logic ──────────────────────────────────────────
+const stocks = {
+  'Komoditas': [
+    { ticker:'PTBA', nama:'Bukit Asam',    harga:'2.870', pe:'5.2x',  signal:'buy',   catatan:'Untung dari rupiah lemah & batu bara tinggi' },
+    { ticker:'ADRO', nama:'Adaro Energy',  harga:'2.420', pe:'4.8x',  signal:'buy',   catatan:'Diversifikasi ke nikel & EV metals' },
+    { ticker:'INCO', nama:'Vale Indonesia',harga:'3.150', pe:'8.1x',  signal:'hold',  catatan:'Nickel demand tergantung EV global' },
+    { ticker:'AALI', nama:'Astra Agro',    harga:'7.450', pe:'9.4x',  signal:'buy',   catatan:'CPO naik + rupiah lemah = margin ekspor bagus' },
+  ],
+  'Perbankan': [
+    { ticker:'BBRI', nama:'Bank Rakyat',   harga:'3.940', pe:'10.2x', signal:'hold',  catatan:'Asing masih net sell, tunggu stabilisasi' },
+    { ticker:'BBCA', nama:'BCA',           harga:'8.750', pe:'22.1x', signal:'hold',  catatan:'Valuasi premium, defensif tapi mahal' },
+    { ticker:'BMRI', nama:'Bank Mandiri',  harga:'5.175', pe:'8.6x',  signal:'buy',   catatan:'Valuasi menarik, NIM stabil' },
+  ],
+  'Telko': [
+    { ticker:'TLKM', nama:'Telkom',        harga:'2.910', pe:'11.3x', signal:'buy',   catatan:'Defensif, dividen konsisten' },
+    { ticker:'EXCL', nama:'XL Axiata',     harga:'2.140', pe:'14.5x', signal:'hold',  catatan:'Merger dengan Smartfren masih proses' },
+  ],
+  'Consumer': [
+    { ticker:'ICBP', nama:'Indofood CBP',  harga:'10.200',pe:'12.8x', signal:'hold',  catatan:'Input cost naik karena rupiah lemah' },
+    { ticker:'UNVR', nama:'Unilever',      harga:'2.200', pe:'18.0x', signal:'avoid', catatan:'Margins tertekan, demand lemah' },
+    { ticker:'MYOR', nama:'Mayora',        harga:'1.875', pe:'16.2x', signal:'hold',  catatan:'Ekspor kuat, tapi input cost naik' },
+  ],
+  'Properti': [
+    { ticker:'BSDE', nama:'BSD City',      harga:'1.085', pe:'7.2x',  signal:'avoid', catatan:'Suku bunga tinggi → kredit properti lesu' },
+    { ticker:'PWON', nama:'Pakuwon',       harga:'465',   pe:'9.1x',  signal:'hold',  catatan:'Mall income stabil, residensial tertekan' },
+  ]
+};
+
+let active = 'Komoditas';
+
+function renderTabs() {
+  document.getElementById('sectorTabs').innerHTML = Object.keys(stocks).map(s =>
+    `<button class="sector-tab${s===active?' active':''}" onclick="setTab('${s}')">${s}</button>`
+  ).join('');
+}
+
+function setTab(s) { active = s; renderTabs(); renderTable(); }
+
+function badgeCls(s) { return s==='buy'?'buy':s==='hold'?'hold':'avoid'; }
+function badgeLbl(s) { return s==='buy'?'BUY':s==='hold'?'HOLD':'AVOID'; }
+
+function renderTable() {
+  const rows = stocks[active];
+  document.getElementById('stockTableWrap').innerHTML = `
+    <div style="overflow-x:auto">
+      <table class="stock-table">
+        <thead><tr>
+          <th>Ticker</th><th>Nama</th><th>Harga (Rp)</th><th>P/E</th><th>Signal</th><th>Catatan</th><th></th>
+        </tr></thead>
+        <tbody>
+          ${rows.map((r,i)=>`<tr>
+            <td><span style="font-family:var(--mono);font-size:12px;font-weight:500;color:var(--warn)">${r.ticker}</span></td>
+            <td>${r.nama}</td>
+            <td style="font-family:var(--mono);font-size:12px">${r.harga}</td>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">${r.pe}</td>
+            <td><span class="badge ${badgeCls(r.signal)}">${badgeLbl(r.signal)}</span></td>
+            <td class="note-cell">${r.catatan}</td>
+            <td><button class="del-btn" onclick="delRow(${i})" title="Hapus">✕</button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addRow()">+ Tambah saham</button>`;
+}
+
+function delRow(i) { stocks[active].splice(i,1); renderTable(); }
+
+function addRow() {
+  const ticker  = prompt('Ticker saham (mis: BBRI):'); if (!ticker) return;
+  const nama    = prompt('Nama perusahaan:') || '';
+  const harga   = prompt('Harga saat ini (Rp):') || '-';
+  const pe      = prompt('P/E ratio (mis: 10.5x):') || '-';
+  const signal  = (prompt('Signal — ketik: buy / hold / avoid:') || 'hold').toLowerCase().trim();
+  const catatan = prompt('Catatan singkat:') || '';
+  stocks[active].push({ ticker: ticker.toUpperCase(), nama, harga, pe, signal, catatan });
+  renderTable();
+}
+
+// Init
+renderTabs();
+renderTable();
+updateCharts();
+</script>
+</body>
+</html>
