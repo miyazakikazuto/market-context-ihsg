@@ -2,13 +2,157 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Redirecting...</title>
-<meta http-equiv="refresh" content="0; url=../../../../index.html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Context Indonesia — Februari 2026 Minggu 3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0f0e; --surface: #161918; --surface2: #1e2220;
+    --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+    --text: #e8ebe9; --muted: #7a8a80;
+    --danger: #e05a4a; --warn: #c8922a; --ok: #4caf7d;
+    --mono: 'IBM Plex Mono', monospace; --sans: 'IBM Plex Sans', sans-serif;
+  }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.6; padding: 2rem 1.5rem; max-width: 980px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 0.5px solid var(--border2); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+  .header-label { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+  h1 { font-size: 20px; font-weight: 500; letter-spacing: -.01em; }
+  .datestamp { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+  .regime-pill { display: inline-block; background: #2e2010; color: var(--warn); font-family: var(--mono); font-size: 10px; padding: 2px 10px; border-radius: 20px; border: 0.5px solid var(--warn); margin-top: 6px; }
+  .back-link { font-family: var(--mono); font-size: 10px; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 1.5rem; transition: color .15s; }
+  .back-link:hover { color: var(--warn); }
+  .section-title { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+  .card-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .metric-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .metric-label { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; }
+  .metric-val { font-family: var(--mono); font-size: 20px; font-weight: 500; line-height: 1.2; }
+  .metric-val.danger { color: var(--danger); } .metric-val.warn { color: var(--warn); } .metric-val.ok { color: var(--ok); }
+  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
+  .divider { border: none; border-top: 0.5px solid var(--border); margin: 1.25rem 0; }
+  .regime-track { display: flex; border-radius: 6px; overflow: hidden; height: 26px; margin-bottom: 8px; border: 0.5px solid var(--border); }
+  .regime-seg { display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; font-weight: 500; }
+  .signal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; }
+  .signal-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+  .signal-card.red { border-left: 2px solid var(--danger); } .signal-card.amber { border-left: 2px solid var(--warn); } .signal-card.green { border-left: 2px solid var(--ok); }
+  .signal-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .signal-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .verdict-box { background: var(--surface); border: 0.5px solid var(--border2); border-left: 3px solid var(--warn); border-radius: 8px; padding: 14px 16px; }
+  .verdict-title { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--warn); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+  .verdict-body { font-size: 13px; color: #c0ccc5; line-height: 1.7; }
+  .verdict-body strong { color: var(--text); font-weight: 500; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { font-family: var(--mono); font-size: 10px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid; }
+  .tag.avoid { border-color: var(--danger); color: var(--danger); background: rgba(224,90,74,.1); }
+  .tag.buy { border-color: var(--ok); color: var(--ok); background: rgba(76,175,125,.1); }
+  .tag.wait { border-color: var(--warn); color: var(--warn); background: rgba(200,146,42,.1); }
+  .nav-row { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid var(--border); }
+  .nav-link { font-family: var(--mono); font-size: 10px; color: var(--muted); text-decoration: none; }
+  .nav-link:hover { color: var(--warn); }
+  footer { margin-top: 1rem; font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: center; }
+  @media (max-width: 640px) { .card-grid-4 { grid-template-columns: repeat(2, 1fr); } .signal-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
-<p style="font-family:monospace;color:#7a8a80;padding:2rem">
-  File dashboard belum diupload untuk periode ini.<br>
-  <a href="../../../../index.html" style="color:#c8922a">Kembali ke arsip</a>
-</p>
+
+<a class="back-link" href="../../../index.html">← Kembali ke arsip</a>
+
+<header>
+  <div>
+    <div class="header-label">Market Intelligence · Indonesia Equities</div>
+    <h1>Market Context Indonesia — Februari Minggu 3</h1>
+    <div class="regime-pill">▼ DISTRIBUSI · TEKANAN MENINGKAT</div>
+  </div>
+  <div class="datestamp"><div>15 – 28 Februari 2026</div><div>Jakarta · IDX</div></div>
+</header>
+
+<div class="section-title">Snapshot periode ini</div>
+<div class="card-grid-4">
+  <div class="metric-card"><div class="metric-label">IHSG (27 Feb)</div><div class="metric-val warn">8.235</div><div class="metric-sub">▼ -1,13% MTD</div></div>
+  <div class="metric-card"><div class="metric-label">USD / IDR</div><div class="metric-val warn">~Rp 16.480</div><div class="metric-sub">Mulai melemah konsisten</div></div>
+  <div class="metric-card"><div class="metric-label">Inflasi (Feb 2026)</div><div class="metric-val warn">4,76%</div><div class="metric-sub">Lonjak dari 3,55% Jan</div></div>
+  <div class="metric-card"><div class="metric-label">BI Rate</div><div class="metric-val ok">4,75%</div><div class="metric-sub">Ditahan — defensif</div></div>
+</div>
+
+<hr class="divider">
+
+<div class="section-title">Market regime · Posisi siklus</div>
+<div class="regime-track">
+  <div class="regime-seg" style="width:20%;background:#1a2535;color:#4a7aaa;">Akumulasi</div>
+  <div class="regime-seg" style="width:25%;background:#1a2e20;color:#4caf7d;">Bull 2023–24</div>
+  <div class="regime-seg" style="width:15%;background:#2e2010;color:#c8922a;font-weight:600;">▶ Distribusi</div>
+  <div class="regime-seg" style="width:20%;background:#3a1a1a;color:#e05a4a;">Bearish</div>
+  <div class="regime-seg" style="width:20%;background:#1e2220;color:#7a8a80;">Re-akumulasi?</div>
+</div>
+<p style="font-size:12px;color:var(--muted);margin-bottom:1.5rem;">IHSG menutup Februari di 8.235 — turun 1,13% sepanjang bulan dan -4,76% YTD. Fase distribusi semakin jelas: harga relatif stabil tapi volume jual asing konsisten tinggi. Iran menutup Selat Hormuz (28 Feb) — katalis geopolitik besar yang langsung akan memukul pasar di Maret.</p>
+
+<hr class="divider">
+
+<div class="section-title">Red flags · Concern utama</div>
+<div class="signal-grid">
+  <div class="signal-card red">
+    <div class="signal-title">Inflasi melonjak ke 4,76%</div>
+    <div class="signal-desc">Inflasi Februari 4,76% YoY — jauh di atas target BI. Lonjakan dipicu Ramadan + harga pangan naik. BI kini tidak punya ruang untuk cut rate.</div>
+  </div>
+  <div class="signal-card red">
+    <div class="signal-title">Iran tutup Selat Hormuz (28 Feb)</div>
+    <div class="signal-desc">Setelah serangan AS-Israel ke Iran, Selat Hormuz ditutup. Harga minyak WTI langsung spike ke $75+ — ini bom waktu untuk pasar Maret.</div>
+  </div>
+  <div class="signal-card red">
+    <div class="signal-title">S&P peringatkan tekanan fiskal RI</div>
+    <div class="signal-desc">S&P Global Ratings mengeluarkan peringatan meningkatnya tekanan fiskal Indonesia — menambah sentimen negatif di mata investor asing global.</div>
+  </div>
+  <div class="signal-card amber">
+    <div class="signal-title">SBN asing net sell berlanjut</div>
+    <div class="signal-desc">Investor non-resident net sell SBN Rp 3,35T MTD — outflow tidak hanya dari saham tapi juga obligasi, menunjukkan kekhawatiran menyeluruh.</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-title">Green flags · Faktor pendukung</div>
+<div class="signal-grid">
+  <div class="signal-card green">
+    <div class="signal-title">Asing berbalik net buy saham</div>
+    <div class="signal-desc">Asing net buy saham Rp 0,36T di Februari — berbalik dari net sell Rp 9,88T di Januari. Tapi jumlahnya kecil dan belum signifikan.</div>
+  </div>
+  <div class="signal-card green">
+    <div class="signal-title">AUM reksa dana tetap tumbuh</div>
+    <div class="signal-desc">AUM industri reksa dana Rp 1.115,71T — naik 1,11% MTD dan 7% YTD. Dana kelolaan investor domestik masih ekspansif.</div>
+  </div>
+  <div class="signal-card green">
+    <div class="signal-title">Investor baru 1,8 juta di Feb</div>
+    <div class="signal-desc">Total investor pasar modal tembus 22,88 juta per 25 Feb — penambahan 1,8 juta investor baru dalam sebulan menunjukkan partisipasi ritel tetap kuat.</div>
+  </div>
+  <div class="signal-card green">
+    <div class="signal-title">Transaksi harian Rp 25,62T</div>
+    <div class="signal-desc">Rata-rata nilai transaksi harian Rp 25,62T sepanjang Februari — likuiditas pasar masih sangat tinggi dan sehat.</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-title">Implikasi keputusan investasi</div>
+<div class="verdict-box">
+  <div class="verdict-title">⚠ Distribusi aktif — bersiap untuk Maret yang lebih berat</div>
+  <div class="verdict-body">
+    Penutupan Selat Hormuz oleh Iran pada 28 Feb adalah <strong>game changer</strong> untuk outlook Maret. Harga minyak akan naik tajam → imported inflation memburuk → rupiah makin tertekan → BI tidak bisa cut rate. Ini bukan waktu untuk agresif masuk. <strong>Perbesar cash, kurangi eksposur ke saham import-heavy</strong>, dan mulai lirik saham komoditas energi yang justru diuntungkan dari kenaikan harga minyak.
+  </div>
+  <div class="tag-row">
+    <span class="tag avoid">✕ Import-heavy consumer</span>
+    <span class="tag avoid">✕ Properti & konstruksi</span>
+    <span class="tag buy">✓ Saham energi & batu bara</span>
+    <span class="tag buy">✓ Perbesar cash</span>
+    <span class="tag wait">⏳ Waspadai pembukaan Maret</span>
+  </div>
+</div>
+
+<div class="nav-row">
+  <a class="nav-link" href="../minggu-1/index.html">← Februari Minggu 1</a>
+  <a class="nav-link" href="../../maret/minggu-1/index.html">Maret Minggu 1 →</a>
+</div>
+
+<footer>Market Context Indonesia · 15–28 Februari 2026 · Bukan rekomendasi investasi</footer>
+
 </body>
 </html>
