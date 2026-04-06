@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Context Indonesia — April 2026 Minggu 1</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0f0e; --surface: #161918; --surface2: #1e2220;
+    --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+    --text: #e8ebe9; --muted: #7a8a80;
+    --danger: #e05a4a; --warn: #c8922a; --ok: #4caf7d;
+    --mono: 'IBM Plex Mono', monospace; --sans: 'IBM Plex Sans', sans-serif;
+  }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.6; padding: 2rem 1.5rem; max-width: 980px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 0.5px solid var(--border2); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+  .header-label { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+  h1 { font-size: 20px; font-weight: 500; letter-spacing: -.01em; }
+  .datestamp { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+  .regime-pill { display: inline-block; background: #3a1a1a; color: var(--danger); font-family: var(--mono); font-size: 10px; padding: 2px 10px; border-radius: 20px; border: 0.5px solid var(--danger); margin-top: 6px; }
+  .early-banner { background: var(--surface2); border: 0.5px solid var(--warn); border-radius: 8px; padding: 10px 14px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+  .early-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warn); flex-shrink: 0; }
+  .early-text { font-family: var(--mono); font-size: 11px; color: var(--warn); }
+  .back-link { font-family: var(--mono); font-size: 10px; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 1.5rem; transition: color .15s; }
+  .back-link:hover { color: var(--warn); }
+  .section-title { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+  .card-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .metric-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .metric-label { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; }
+  .metric-val { font-family: var(--mono); font-size: 20px; font-weight: 500; line-height: 1.2; }
+  .metric-val.danger { color: var(--danger); } .metric-val.warn { color: var(--warn); } .metric-val.ok { color: var(--ok); }
+  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
+  .divider { border: none; border-top: 0.5px solid var(--border); margin: 1.25rem 0; }
+  .regime-track { display: flex; border-radius: 6px; overflow: hidden; height: 26px; margin-bottom: 8px; border: 0.5px solid var(--border); }
+  .regime-seg { display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; font-weight: 500; }
+  .signal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; }
+  .signal-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+  .signal-card.red { border-left: 2px solid var(--danger); } .signal-card.amber { border-left: 2px solid var(--warn); } .signal-card.green { border-left: 2px solid var(--ok); }
+  .signal-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .signal-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .timeline { margin-bottom: 1.5rem; }
+  .tl-item { display: grid; grid-template-columns: 90px 1fr; gap: 12px; margin-bottom: 8px; align-items: start; }
+  .tl-date { font-family: var(--mono); font-size: 10px; color: var(--warn); padding-top: 2px; }
+  .tl-content { background: var(--surface); border: 0.5px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .tl-content strong { color: var(--text); font-weight: 500; }
+  .tl-content.ok { border-color: var(--ok); }
+  .tl-content.warn { border-color: var(--warn); }
+  .verdict-box { background: var(--surface); border: 0.5px solid var(--border2); border-left: 3px solid var(--warn); border-radius: 8px; padding: 14px 16px; }
+  .verdict-title { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--warn); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+  .verdict-body { font-size: 13px; color: #c0ccc5; line-height: 1.7; }
+  .verdict-body strong { color: var(--text); font-weight: 500; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { font-family: var(--mono); font-size: 10px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid; }
+  .tag.avoid { border-color: var(--danger); color: var(--danger); background: rgba(224,90,74,.1); }
+  .tag.buy { border-color: var(--ok); color: var(--ok); background: rgba(76,175,125,.1); }
+  .tag.wait { border-color: var(--warn); color: var(--warn); background: rgba(200,146,42,.1); }
+  .nav-row { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid var(--border); }
+  .nav-link { font-family: var(--mono); font-size: 10px; color: var(--muted); text-decoration: none; }
+  .nav-link:hover { color: var(--warn); }
+  footer { margin-top: 1rem; font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: center; }
+  @media (max-width: 640px) { .card-grid-4 { grid-template-columns: repeat(2, 1fr); } .signal-grid { grid-template-columns: 1fr; } .tl-item { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../../../index.html">← Kembali ke arsip</a>
+
+<header>
+  <div>
+    <div class="header-label">Market Intelligence · Indonesia Equities</div>
+    <h1>Market Context Indonesia — April Minggu 1</h1>
+    <div class="regime-pill">▲ REBOUND TEKNIKAL · VOLATILITAS TINGGI</div>
+  </div>
+  <div class="datestamp"><div>1 – 14 April 2026</div><div>Early update · 6 Apr</div></div>
+</header>
+
+<div class="early-banner">
+  <div class="early-dot"></div>
+  <div class="early-text">Early update — data 1–6 April. Akan diperbarui setelah 14 April dengan data lengkap.</div>
+</div>
+
+<div class="section-title">Snapshot awal periode</div>
+<div class="card-grid-4">
+  <div class="metric-card">
+    <div class="metric-label">IHSG (1 Apr)</div>
+    <div class="metric-val ok">7.184</div>
+    <div class="metric-sub">▲ +1,93% — rebound pasca Lebaran</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">IHSG (2 Apr)</div>
+    <div class="metric-val danger">7.026</div>
+    <div class="metric-sub">▼ -2,19% — pidato Trump ambigu</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">Inflasi Maret 2026</div>
+    <div class="metric-val ok">3,48%</div>
+    <div class="metric-sub">Kembali masuk target BI 2,5%±1%</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">PMI Manufaktur</div>
+    <div class="metric-val warn">50,1</div>
+    <div class="metric-sub">Turun dari 53,8 — hampir kontraksi</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-title">Market regime · Posisi siklus</div>
+<div class="regime-track">
+  <div class="regime-seg" style="width:20%;background:#1a2535;color:#4a7aaa;">Akumulasi</div>
+  <div class="regime-seg" style="width:25%;background:#1a2e20;color:#4caf7d;">Bull 2023–24</div>
+  <div class="regime-seg" style="width:15%;background:#2e2010;color:#c8922a;">Distribusi</div>
+  <div class="regime-seg" style="width:20%;background:#3a1a1a;color:#e05a4a;font-weight:600;">▶ Bear / Rebound</div>
+  <div class="regime-seg" style="width:20%;background:#1e2220;color:#7a8a80;">Re-akumulasi?</div>
+</div>
+<p style="font-size:12px;color:var(--muted);margin-bottom:1.5rem;">IHSG masuk April dari level ~7.000 — turun 16,91% YTD per 1 April. Ada sinyal rebound teknikal pasca Lebaran, dipicu harapan de-eskalasi Iran. Tapi tren bear belum terkonfirmasi berakhir — setiap rebound masih perlu dicurigai sebagai dead cat bounce. Level kritis: support 7.000, resistance 7.200–7.300.</p>
+
+<hr class="divider">
+
+<div class="section-title">Kronologi · 1–6 April</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-date">1 Apr (Rab)</div>
+    <div class="tl-content ok"><strong>IHSG rebound +1,93% ke 7.184</strong> — mengakhiri 4 hari pelemahan berturut-turut. Katalis: Trump nyatakan AS bisa akhiri keterlibatan militer di Iran dalam 2–3 minggu. Seluruh Asia menguat. 10 dari 11 sektor hijau, dipimpin industri +6,11%.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">1 Apr (data)</div>
+    <div class="tl-content ok"><strong>Inflasi Maret 3,48% YoY</strong> — turun signifikan dari 4,76% Februari, kembali masuk target BI. PMI Manufaktur 50,1 (dari 53,8). Neraca dagang Februari surplus $1,28M — surplus ke-70 bulan berturut-turut sejak Mei 2020.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">2 Apr (Kam)</div>
+    <div class="tl-content warn"><strong>IHSG anjlok -2,19% ke 7.026</strong> — pidato Trump tidak beri kejelasan soal Iran, bahkan isyaratkan serangan lebih agresif. 530 saham merah. Asing net sell Rp 864M. Pasar tutup libur Paskah setelah sesi ini.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">3–6 Apr</div>
+    <div class="tl-content warn">Pasar tutup libur Paskah 3–5 Apr. <strong>Resume Senin 6 Apr</strong> — BNI Sekuritas prediksi IHSG uji support 7.000. Kiwoom: waspadai reaksi MSCI HSC yang bisa picu volatilitas tinggi. Trump tunda serangan fasilitas energi Iran hingga 6 April.</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-title">Red flags · Concern utama</div>
+<div class="signal-grid">
+  <div class="signal-card red">
+    <div class="signal-title">Trump ambigu soal Iran — volatilitas tetap tinggi</div>
+    <div class="signal-desc">Satu pernyataan Trump soal Iran bisa bikin IHSG naik 2% atau turun 2% dalam satu hari. Ketidakpastian geopolitik ini akan terus membayangi pasar selama April — tidak ada kepastian resolusi konflik.</div>
+  </div>
+  <div class="signal-card red">
+    <div class="signal-title">Support 7.000 kritis — risiko breakdown</div>
+    <div class="signal-desc">IHSG sudah dua kali menyentuh 7.000 (intraday). Jika breakdown di bawah 7.000, BNI Sekuritas proyeksikan koreksi lanjut ke 6.850–6.950. Level ini menjadi penentu arah April.</div>
+  </div>
+  <div class="signal-card red">
+    <div class="signal-title">PMI Manufaktur turun ke 50,1</div>
+    <div class="signal-desc">Dari 53,8 ke 50,1 dalam satu bulan — hampir masuk zona kontraksi (di bawah 50). Ini sinyal aktivitas industri mulai melambat akibat gangguan rantai pasok dan kenaikan harga bahan baku.</div>
+  </div>
+  <div class="signal-card amber">
+    <div class="signal-title">MSCI HSC review — potensi tekanan baru</div>
+    <div class="signal-desc">MSCI bakal bereaksi terhadap saham High Shareholding Concentration (HSC) — bisa memicu penyesuaian portofolio fund global dan tekanan jual selektif pada saham tertentu di awal April.</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-title">Green flags · Sinyal positif</div>
+<div class="signal-grid">
+  <div class="signal-card green">
+    <div class="signal-title">Inflasi kembali ke target BI</div>
+    <div class="signal-desc">Inflasi Maret 3,48% YoY — turun drastis dari 4,76% Februari. Ini membuka ruang bagi BI untuk pertimbangkan cut rate ke depan, yang bisa jadi katalis positif bagi pasar saham.</div>
+  </div>
+  <div class="signal-card green">
+    <div class="signal-title">Neraca dagang surplus ke-70 bulan</div>
+    <div class="signal-desc">Surplus dagang $1,28M di Februari — konsisten positif sejak Mei 2020. Fondasi eksternal Indonesia tetap kuat, mendukung stabilitas rupiah jangka menengah.</div>
+  </div>
+  <div class="signal-card green">
+    <div class="signal-title">Rebound teknikal terkonfirmasi</div>
+    <div class="signal-desc">IHSG tidak cetak lower low baru — bertahan di atas 6.917 (low Maret). Ini sinyal teknikal positif awal. Phintraco: IHSG berpeluang menguji resistance 7.200–7.300 jika sentimen membaik.</div>
+  </div>
+  <div class="signal-card green">
+    <div class="signal-title">Harapan de-eskalasi Iran</div>
+    <div class="signal-desc">Trump isyaratkan keluar dari konflik Iran 2–3 minggu ke depan. Jika terealisasi, harga minyak akan turun → inflasi mereda → rupiah menguat → IHSG bisa rally signifikan.</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-title">Implikasi keputusan investasi</div>
+<div class="verdict-box">
+  <div class="verdict-title">Rebound ada, tapi belum aman untuk agresif masuk</div>
+  <div class="verdict-body">
+    April dibuka dengan sinyal campuran — inflasi membaik dan ada harapan de-eskalasi Iran, tapi PMI turun dan support 7.000 masih rentan. Ini bukan saatnya <strong>all-in</strong>, tapi juga bukan saatnya <strong>fully cash</strong>. Strategi terbaik: <strong>akumulasi bertahap (DCA)</strong> di saham bluechip defensif jika IHSG bertahan di atas 7.000. Jika break di bawah 7.000, tahan dulu dan tunggu konfirmasi support baru. Fokus pada saham yang diuntungkan jika konflik Iran mereda: perbankan besar, consumer, infrastruktur.
+  </div>
+  <div class="tag-row">
+    <span class="tag avoid">✕ All-in sekarang</span>
+    <span class="tag avoid">✕ Saham spekulatif kecil</span>
+    <span class="tag buy">✓ DCA bertahap bluechip</span>
+    <span class="tag buy">✓ BBRI / BMRI / TLKM</span>
+    <span class="tag wait">⏳ Pantau level 7.000</span>
+    <span class="tag wait">⏳ Update 14 April</span>
+  </div>
+</div>
+
+<div class="nav-row">
+  <a class="nav-link" href="../../maret/minggu-3/index.html">← Maret Minggu 3</a>
+  <a class="nav-link" href="../minggu-3/index.html">April Minggu 3 →</a>
+</div>
+
+<footer>Market Context Indonesia · 1–14 April 2026 · Early update 6 Apr · Bukan rekomendasi investasi</footer>
+
+</body>
+</html>
